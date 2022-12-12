@@ -1,11 +1,12 @@
 import tkinter as tk
-why no work
-InventoryLookupFile = "InventoryLookup.txt"
-InventoryItemList = "InventoryItemList.txt"
+from turtle import bgcolor
+
+InventoryLookupFile = "Food_Inventory_python/InventoryLookup.txt"
+InventoryItemList = "InventoryLookup.txt"
 
 # Create the main window
 root = tk.Tk()
-root.title("Current Inventory")
+root.title("Inventory Manager")
 
 
 # Create a text box for inputting new items
@@ -14,7 +15,10 @@ input_label.pack()
 input_box = tk.Entry(root)
 input_box.pack()
 
-
+description_label = tk.Label(root, text="product name (only for new products):")
+description_label.pack()
+description_input = tk.Entry(root)
+description_input.pack()
 
 # Create a button for adding items to the file
 
@@ -26,7 +30,7 @@ def add_item():
     # Open the file for appending
     with open(InventoryItemList, "a") as file:
         # Write the item to the file and add a newline character
-        file.write(item + "\n")
+        file.write("BARCODE:" + item +  "\n")
 
     # Clear the input box
     input_box.delete(0, "end")
@@ -35,7 +39,7 @@ def add_item():
 
 
 add_button = tk.Button(root, text="Add Item", command=add_item)
-add_button.config(height=5, width=15, font=("Arial", 20, "bold"), activebackground="red")
+add_button.config(height=5, width=15, font=("Arial", 20, "bold"), bg="green")
 add_button.pack()
 
 
@@ -64,25 +68,8 @@ def remove_entry():
         file.write(line)
 
 
-"""def remove_entry():
-  # Get the location of the file and the entry to remove
-  entry_to_remove = remove_box.get()
-
-  # Open the file and read its contents
-  with open(InventoryItemList, 'r') as file:
-    file_contents = file.read()
-
-  # Remove the entry from the file contents
-  updated_file_contents = file_contents.replace(entry_to_remove, '')
-
-  # Write the updated contents back to the file
-  with open(InventoryItemList, 'w') as file:
-    file.write(updated_file_contents)
-
-  # Clear the input box
-  remove_box.delete(0, "end")"""
-
-remove_button = tk.Button(root, text="Remove Item", command=remove_entry, activebackground="red")
+remove_button = tk.Button(root, text="Remove Item", command=remove_entry)
+remove_button.config(height=5, width=15, font=("Arial", 20, "bold"), bg="red")
 remove_button.pack()
 
 
