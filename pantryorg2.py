@@ -1,8 +1,8 @@
 import tkinter as tk
 from turtle import bgcolor
 
-InventoryLookupFile = "Food_Inventory_python/InventoryLookup.txt"
-InventoryItemList = "InventoryLookup.txt"
+InventoryLookupFile = "InventoryLookup.txt"
+InventoryItemList = "InventoryItemList.txt"
 
 # Create the main window
 root = tk.Tk()
@@ -39,7 +39,7 @@ def add_item():
 
 
 add_button = tk.Button(root, text="Add Item", command=add_item)
-add_button.config(height=5, width=15, font=("Arial", 20, "bold"), bg="green")
+add_button.config(height=2, width=10, font=("Arial", 20, "bold"), bg="green")
 add_button.pack()
 
 
@@ -69,7 +69,7 @@ def remove_entry():
 
 
 remove_button = tk.Button(root, text="Remove Item", command=remove_entry)
-remove_button.config(height=5, width=15, font=("Arial", 20, "bold"), bg="red")
+remove_button.config(height=2, width=10, font=("Arial", 20, "bold"), bg="red")
 remove_button.pack()
 
 
