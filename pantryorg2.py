@@ -1,5 +1,6 @@
 import tkinter as tk
 from turtle import bgcolor
+import requests
 
 InventoryLookupFile = "InventoryLookup.txt"
 InventoryItemList = "InventoryItemList.txt"
@@ -10,7 +11,7 @@ root.title("Inventory Manager")
 
 
 # Create a text box for inputting new items
-input_label = tk.Label(root, text="Input New Item:")
+input_label = tk.Label(root, text="Barcode scan:")
 input_label.pack()
 input_box = tk.Entry(root)
 input_box.pack()
@@ -20,9 +21,7 @@ description_label.pack()
 description_input = tk.Entry(root)
 description_input.pack()
 
-# Create a button for adding items to the file
 
-# Function that is called when the "Add Item" button is clicked
 def add_item():
     # Get the text from the input box
     item = input_box.get()
@@ -35,7 +34,42 @@ def add_item():
     # Clear the input box
     input_box.delete(0, "end")
 
-# Set the "Add Item" button's command to the add_item function
+####
+
+# Replace with your own API key
+API_KEY = 'YOUR_API_KEY'
+
+# Function to look up a UPC code using the UPCitemdb API
+def lookup_upc(upc_code, api_key):
+  # Construct the URL for the API request
+  url = 'https://api.upcitemdb.com/prod/trial/lookup'
+  params = {
+    'upc': upc_code,
+  }
+
+  # Make the request to the UPCitemdb API
+  response = requests.get(url, params=params)
+
+  # Parse the JSON response
+  response_json = response.json()
+
+  # Extract the information about the item from the response
+  item = response_json['items'][0]
+  title = item['title']
+  brand = item['brand']
+  description = item['description']
+  image_url = item['images'][0]
+
+  # Print the information about the item
+  print(f'Title: {title}')
+  print(f'Brand: {brand}')
+  print(f'Description: {description}')
+  print(f'Image URL: {image_url}')
+
+# Look up a UPC code
+lookup_upc('0123456789', API_KEY)
+
+####
 
 
 add_button = tk.Button(root, text="Add Item", command=add_item)
@@ -87,6 +121,7 @@ def ShowAllItems():
 
 show_button = tk.Button(root, text="Show All Items", command=ShowAllItems)
 show_button.pack()
+
 
 # Start the main event loop
 root.mainloop()
