@@ -1,4 +1,7 @@
 import tkinter as tk
+why no work
+InventoryLookupFile = "InventoryLookup.txt"
+InventoryItemList = "InventoryItemList.txt"
 
 # Create the main window
 root = tk.Tk()
@@ -21,7 +24,7 @@ def add_item():
     item = input_box.get()
 
     # Open the file for appending
-    with open("user_input.txt", "a") as file:
+    with open(InventoryItemList, "a") as file:
         # Write the item to the file and add a newline character
         file.write(item + "\n")
 
@@ -49,12 +52,12 @@ def remove_entry():
   entry_to_remove = remove_box.get()
 
   # Open the file for reading
-  with open("user_input.txt", "r") as file:
+  with open(InventoryItemList, "r") as file:
     # Read the file's contents into a list of lines
     lines = file.readlines()
 
   # Open the file for writing
-  with open("user_input.txt", "w") as file:
+  with open(InventoryItemList, "w") as file:
     # Write each line to the file, unless it is a blank line or matches the text to be removed
     for line in lines:
       if line.strip() != entry_to_remove:
@@ -63,18 +66,17 @@ def remove_entry():
 
 """def remove_entry():
   # Get the location of the file and the entry to remove
-  file_location = 'user_input.txt'
   entry_to_remove = remove_box.get()
 
   # Open the file and read its contents
-  with open(file_location, 'r') as file:
+  with open(InventoryItemList, 'r') as file:
     file_contents = file.read()
 
   # Remove the entry from the file contents
   updated_file_contents = file_contents.replace(entry_to_remove, '')
 
   # Write the updated contents back to the file
-  with open(file_location, 'w') as file:
+  with open(InventoryItemList, 'w') as file:
     file.write(updated_file_contents)
 
   # Clear the input box
@@ -87,7 +89,7 @@ remove_button.pack()
 # Create a button for displaying all items in the file
 def ShowAllItems():
   # Open the user_input.txt file in read-only mode
-  with open("user_input.txt", "r") as file:
+  with open(InventoryItemList, "r") as file:
     # Read the contents of the file
     contents = file.read()
 
