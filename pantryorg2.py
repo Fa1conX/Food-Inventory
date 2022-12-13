@@ -16,11 +16,14 @@ input_label.pack()
 input_box = tk.Entry(root)
 input_box.pack()
 
-description_label = tk.Label(root, text="product name (only for new products):")
-description_label.pack()
-description_input = tk.Entry(root)
-description_input.pack()
+def auto_run(event):
+    # Get the input text from the input box
+    input_text = event.widget.get()
 
+    # Check if the input text is 12 characters long
+    if len(input_text) == 12:
+        add_item()
+input_box.bind("<Key>", auto_run)
 
 def add_item():
     # Get the text from the input box
@@ -29,7 +32,7 @@ def add_item():
     # Open the file for appending
     with open(InventoryItemList, "a") as file:
         # Write the item to the file and add a newline character
-        file.write("BARCODE:" + item +  "\n")
+        file.write("UPC: " + item +  "\n")
 
     # Clear the input box
     input_box.delete(0, "end")
@@ -38,7 +41,7 @@ def add_item():
 
 # Replace with your own API key
 API_KEY = 'YOUR_API_KEY'
-
+"""
 # Function to look up a UPC code using the UPCitemdb API
 def lookup_upc(upc_code, api_key):
   # Construct the URL for the API request
@@ -70,7 +73,7 @@ def lookup_upc(upc_code, api_key):
 lookup_upc('0123456789', API_KEY)
 
 ####
-
+"""
 
 add_button = tk.Button(root, text="Add Item", command=add_item)
 add_button.config(height=2, width=10, font=("Arial", 20, "bold"), bg="green")
