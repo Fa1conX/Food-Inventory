@@ -1,3 +1,5 @@
 Love Crunch Granola
     BARCODE:058449771982
     
+UCP: 123456789012
+this is an item UPC: ha

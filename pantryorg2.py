@@ -37,13 +37,27 @@ def add_item():
     # Clear the input box
     input_box.delete(0, "end")
 
-####
 
-# Replace with your own API key
-API_KEY = 'YOUR_API_KEY'
+def check_upc(upc):
+    # Open the InventoryLookup.txt file in read-only mode
+    with open("InventoryLookup.txt", "r") as lookup_file:
+        # Read the contents of the file into a list of lines
+        lookup_file_lines = lookup_file.readlines()
 
-# Function to look up a UPC code using the UPCitemdb API
-def lookup_upc(upc_code, api_key):
+        # Check each line in the file to see if it contains the UPC
+        for line in lookup_file_lines:
+            if upc in line:
+                # If the UPC is found in the line, add the whole line to the InventoryItemList.txt file
+                with open("InventoryItemList.txt", "a") as item_list_file:
+                    item_list_file.write(line + "\n")
+
+                # Return True to indicate that the UPC was found
+                return True
+
+        # If the UPC is not found in any of the lines, return False
+        return False
+
+def lookup_upc(upc_code):
   # Construct the URL for the API request
   url = 'https://api.upcitemdb.com/prod/trial/lookup'
   params = {
@@ -69,10 +83,12 @@ def lookup_upc(upc_code, api_key):
   print(f'Description: {description}')
   print(f'Image URL: {image_url}')
 
-# Look up a UPC code
-# lookup_upc('0123456789', API_KEY)
+# Prompt the user for a UPC
+##upc = input("Enter a UPC: ")
 
-####
+#if not check_upc(upc):
+#    lookup_upc(upc)
+
 
 
 add_button = tk.Button(root, text="Add Item", command=add_item)
