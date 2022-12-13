@@ -41,13 +41,13 @@ def add_item():
 
 # Replace with your own API key
 API_KEY = 'YOUR_API_KEY'
-"""
+
 # Function to look up a UPC code using the UPCitemdb API
 def lookup_upc(upc_code, api_key):
   # Construct the URL for the API request
   url = 'https://api.upcitemdb.com/prod/trial/lookup'
   params = {
-    'upc': upc_code,
+    'upc': upc_code
   }
 
   # Make the request to the UPCitemdb API
@@ -70,10 +70,10 @@ def lookup_upc(upc_code, api_key):
   print(f'Image URL: {image_url}')
 
 # Look up a UPC code
-lookup_upc('0123456789', API_KEY)
+# lookup_upc('0123456789', API_KEY)
 
 ####
-"""
+
 
 add_button = tk.Button(root, text="Add Item", command=add_item)
 add_button.config(height=2, width=10, font=("Arial", 20, "bold"), bg="green")
@@ -84,11 +84,12 @@ add_button.pack()
 remove_label = tk.Label(root, text="Remove Item:")
 remove_label.pack()
 remove_box = tk.Entry(root)
+remove_box.config()
 remove_box.pack()
 
 
 # Create a button for removing items from the file
-def remove_entry():
+def remove_item():
   # Get the text from the text box
   entry_to_remove = remove_box.get()
 
@@ -103,9 +104,12 @@ def remove_entry():
     for line in lines:
       if line.strip() != entry_to_remove:
         file.write(line)
+      else:
+        # If the line matches the text to be removed, write it to the file and then break out of the loop
+        file.write(line)
+        break
 
-
-remove_button = tk.Button(root, text="Remove Item", command=remove_entry)
+remove_button = tk.Button(root, text="Remove Item", command=remove_item)
 remove_button.config(height=2, width=10, font=("Arial", 20, "bold"), bg="red")
 remove_button.pack()
 
