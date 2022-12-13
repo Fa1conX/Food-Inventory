@@ -7,14 +7,15 @@ InventoryItemList = "InventoryItemList.txt"
 
 # Create the main window
 root = tk.Tk()
+root.geometry("500x300+0+0")
 root.title("Inventory Manager")
 
 
 # Create a text box for inputting new items
 input_label = tk.Label(root, text="Barcode scan:")
-input_label.pack()
+input_label.pack(side="top", anchor="w")
 input_box = tk.Entry(root)
-input_box.pack()
+input_box.pack(side="top", anchor="w")
 
 def auto_run(event):
     # Get the input text from the input box
@@ -93,15 +94,15 @@ def lookup_upc(upc_code):
 
 add_button = tk.Button(root, text="Add Item", command=add_item)
 add_button.config(height=2, width=10, font=("Arial", 20, "bold"), bg="green")
-add_button.pack()
+add_button.pack(side="top", anchor="w")
 
 
 # Create a text box for removing items
 remove_label = tk.Label(root, text="Remove Item:")
-remove_label.pack()
+remove_label.pack(side="top", anchor="w")
 remove_box = tk.Entry(root)
 remove_box.config()
-remove_box.pack()
+remove_box.pack(side="top", anchor="w")
 
 
 # Create a button for removing items from the file
@@ -127,7 +128,7 @@ def remove_item():
 
 remove_button = tk.Button(root, text="Remove Item", command=remove_item)
 remove_button.config(height=2, width=10, font=("Arial", 20, "bold"), bg="red")
-remove_button.pack()
+remove_button.pack(side="top", anchor="w")
 
 
 # Create a button for displaying all items in the file
@@ -143,7 +144,7 @@ def ShowAllItems():
     current_inventory.pack()
 
 show_button = tk.Button(root, text="Show All Items", command=ShowAllItems)
-show_button.pack()
+show_button.pack(side="top", anchor="w")
 
 
 # Start the main event loop
