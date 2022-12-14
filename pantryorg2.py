@@ -27,13 +27,13 @@ def auto_run(event):
 input_box.bind("<Key>", auto_run)
 
 def add_item():
-    # Get the text from the input box
-    item = input_box.get()
+    upc = input_box.get()
+    check_upc(upc)
 
     # Open the file for appending
     with open(InventoryItemList, "a") as file:
         # Write the item to the file and add a newline character
-        file.write("UPC: " + item +  "\n")
+        file.write(upc + "\n")
 
     # Clear the input box
     input_box.delete(0, "end")
@@ -55,9 +55,8 @@ def check_upc(upc):
                 # Return True to indicate that the UPC was found
                 return True
 
-        # If the UPC is not found in any of the lines, return False
-        return False
-
+        lookup_upc(upc)
+        
 def lookup_upc(upc_code):
   # Construct the URL for the API request
   url = 'https://api.upcitemdb.com/prod/trial/lookup'
@@ -84,11 +83,7 @@ def lookup_upc(upc_code):
   print(f'Description: {description}')
   print(f'Image URL: {image_url}')
 
-# Prompt the user for a UPC
-##upc = input("Enter a UPC: ")
 
-#if not check_upc(upc):
-#    lookup_upc(upc)
 
 
 
