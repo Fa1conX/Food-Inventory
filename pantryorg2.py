@@ -10,13 +10,32 @@ root = tk.Tk()
 root.geometry("500x300+0+0")
 root.title("Inventory Manager")
 
-
 # Create a text box for inputting new items
 input_label = tk.Label(root, text="Barcode scan:")
 input_label.pack(side="top", anchor="w")
 input_box = tk.Entry(root)
 input_box.pack(side="top", anchor="w")
 
+add_button = tk.Button(root, text="Add Item", command=add_item)
+add_button.config(height=2, width=10, font=("Arial", 20, "bold"), bg="green")
+add_button.pack(side="top", anchor="w")
+
+
+# Create a text box for removing items
+remove_label = tk.Label(root, text="Remove Item:")
+remove_label.pack(side="top", anchor="w")
+remove_box = tk.Entry(root)
+remove_box.config()
+remove_box.pack(side="top", anchor="w")
+
+remove_button = tk.Button(root, text="Remove Item", command=remove_item)
+remove_button.config(height=2, width=10, font=("Arial", 20, "bold"), bg="red")
+remove_button.pack(side="top", anchor="w")
+
+show_button = tk.Button(root, text="Show All Items", command=ShowAllItems)
+show_button.pack(side="top", anchor="w")
+
+# FUNCTIONS
 def auto_run(event):
     # Get the input text from the input box
     input_text = event.widget.get()
@@ -38,7 +57,6 @@ def add_item():
     # Clear the input box
     input_box.delete(0, "end")
 
-
 def check_upc(upc):
     # Open the InventoryLookup.txt file in read-only mode
     with open("InventoryLookup.txt", "r") as lookup_file:
@@ -51,6 +69,7 @@ def check_upc(upc):
                 # If the UPC is found in the line, add the whole line to the InventoryItemList.txt file
                 with open("InventoryItemList.txt", "a") as item_list_file:
                     item_list_file.write(line + "\n")
+                    
 
                 # Return True to indicate that the UPC was found
                 return True
@@ -83,24 +102,6 @@ def lookup_upc(upc_code):
   print(f'Description: {description}')
   print(f'Image URL: {image_url}')
 
-
-
-
-
-add_button = tk.Button(root, text="Add Item", command=add_item)
-add_button.config(height=2, width=10, font=("Arial", 20, "bold"), bg="green")
-add_button.pack(side="top", anchor="w")
-
-
-# Create a text box for removing items
-remove_label = tk.Label(root, text="Remove Item:")
-remove_label.pack(side="top", anchor="w")
-remove_box = tk.Entry(root)
-remove_box.config()
-remove_box.pack(side="top", anchor="w")
-
-
-# Create a button for removing items from the file
 def remove_item():
   # Get the text from the text box
   entry_to_remove = remove_box.get()
@@ -121,11 +122,6 @@ def remove_item():
         file.write(line)
         break
 
-remove_button = tk.Button(root, text="Remove Item", command=remove_item)
-remove_button.config(height=2, width=10, font=("Arial", 20, "bold"), bg="red")
-remove_button.pack(side="top", anchor="w")
-
-
 # Create a button for displaying all items in the file
 def ShowAllItems():
   # Open the user_input.txt file in read-only mode
@@ -137,9 +133,6 @@ def ShowAllItems():
     window = tk.Toplevel(root)
     current_inventory = tk.Label(window, width=25, text=contents)
     current_inventory.pack()
-
-show_button = tk.Button(root, text="Show All Items", command=ShowAllItems)
-show_button.pack(side="top", anchor="w")
 
 
 # Start the main event loop
